@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={clsx(inter.className, "scroll-smooth")}>
         <Providers>
           <Header />
-          <main className="relative  mx-auto mb-16 max-w-7xl px-8 py-24">
+          <main className="relative mx-auto mb-16 max-w-7xl px-8 py-24 min-h-[99vh]">
             {children}
           </main>
           <Footer />

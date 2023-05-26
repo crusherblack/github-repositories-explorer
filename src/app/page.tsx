@@ -1,11 +1,24 @@
+import Accordion from "@/components/generics/accordion";
 import Hero from "@/components/hero";
-import Portofolio from "@/components/portofolio";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <Portofolio />
+      <Accordion
+        datasource={[
+          {
+            id: "1",
+            header: <h1>Hallo</h1>,
+            content: <>adwawd</>,
+          },
+          {
+            id: "2",
+            header: <h1>Hallo</h1>,
+            content: <>adwawd</>,
+          },
+        ]}
+      />
     </>
   );
 }

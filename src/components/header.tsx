@@ -16,7 +16,7 @@ const Header = () => {
           className="flex items-center justify-center gap-1"
           aria-label="Homepage"
         >
-          Mesra
+          GitHub Repositories Explorer
         </Link>
         <div className="flex items-center gap-2">
           <Navbar />
