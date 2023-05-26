@@ -1,21 +1,41 @@
 import { Octokit } from "@octokit/rest";
-import { Endpoints } from "@octokit/types";
 import { NextResponse } from "next/server";
 
 export const GET = async (request: Request) => {
-  const { searchParams } = new URL(request.url);
-  const username = searchParams.get("username") || "";
+  try {
+    const { searchParams } = new URL(request.url);
+    const username = searchParams.get("username") || "";
 
-  const octokit = new Octokit({
-    auth: process.env.GITHUB_TOKEN,
-  });
+    if (!username) {
+      return NextResponse.json(
+        {
+          error: "username is required",
+        },
+        { status: 400 }
+      );
+    }
 
-  const { data }: Endpoints["GET /users/{username}/repos"]["response"] =
-    await octokit.request("GET /users/{username}/repos", {
-      username,
+    const octokit = new Octokit({
+      auth: process.env.GITHUB_TOKEN,
     });
 
-  return NextResponse.json({
-    data,
-  });
+    const { data } = await octokit.rest.search.users({
+      q: username,
+      per_page: 5,
+    });
+
+    return NextResponse.json({
+      message: "Success",
+      data,
+    });
+  } catch (_error) {
+    return NextResponse.json(
+      {
+        message: "Server Error",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
 };

@@ -82,17 +82,6 @@ const Hero = () => {
         <div className="hidden md:flex justify-center md:justify-start">
           <a href="https://wa.me/+6282287606400" target="_blank">
             <Button>Contact Me</Button>
-            <Button size="large" loading>
-              Contact Me
-            </Button>
-            <Button size="small">Contact Me</Button>
-            <Button variant="outline">Contact Me</Button>
-            <Button variant="ghost" disabled>
-              Contact Me
-            </Button>
-            <Button variant="link" loading>
-              Contact Me
-            </Button>
           </a>
         </div>
       </div>
