@@ -1,10 +1,10 @@
+import { GithubSearchUsersResponse } from "@/types/github";
 import { Octokit } from "@octokit/rest";
 import { NextResponse } from "next/server";
 
-export const GET = async (request: Request) => {
+export const POST = async (request: Request) => {
   try {
-    const { searchParams } = new URL(request.url);
-    const username = searchParams.get("username") || "";
+    const { username } = await request.json();
 
     if (!username) {
       return NextResponse.json(
@@ -19,7 +19,7 @@ export const GET = async (request: Request) => {
       auth: process.env.GITHUB_TOKEN,
     });
 
-    const { data } = await octokit.rest.search.users({
+    const { data }: GithubSearchUsersResponse = await octokit.search.users({
       q: username,
       per_page: 5,
     });

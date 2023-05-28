@@ -1,5 +1,5 @@
+import { GithubRepoResponse, GithubUsernameResponse } from "@/types/github";
 import { Octokit } from "@octokit/rest";
-import { Endpoints } from "@octokit/types";
 import { NextResponse } from "next/server";
 
 export const GET = async (request: Request) => {
@@ -20,16 +20,24 @@ export const GET = async (request: Request) => {
       auth: process.env.GITHUB_TOKEN,
     });
 
-    const {
-      data: repos,
-    }: Endpoints["GET /users/{username}/repos"]["response"] =
-      await octokit.request("GET /users/{username}/repos", {
+    const { data: profile }: GithubUsernameResponse = await octokit.request(
+      "GET /users/{username}",
+      {
         username,
-      });
+      }
+    );
+
+    const { data: repos }: GithubRepoResponse = await octokit.request(
+      "GET /users/{username}/repos",
+      {
+        username,
+        per_page: profile.public_repos,
+      }
+    );
 
     return NextResponse.json({
       message: "Success",
-      data: repos,
+      data: { profile, repos },
     });
   } catch (_error) {
     return NextResponse.json(

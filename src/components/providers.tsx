@@ -1,6 +1,9 @@
 "use client";
 
+import { Provider } from "react-redux";
+
 import { ThemeProvider } from "next-themes";
+import { store } from "@/redux/store";
 
 type ProvidersProps = {
   children: React.ReactNode;
@@ -15,7 +18,7 @@ const Providers = (props: ProvidersProps) => {
       defaultTheme="dark"
       disableTransitionOnChange
     >
-      {children}
+      <Provider store={store}>{children}</Provider>
     </ThemeProvider>
   );
 };

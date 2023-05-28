@@ -18,7 +18,7 @@ const ThemeSwitcher = () => {
 
   return (
     <div
-      className="rounded px-3 py-2 text-sm font-medium transition-colors duration-150 hover:cursor-pointer hover:opacity-80"
+      className="-mr-4 md:mr-0 rounded px-3 py-2 text-sm font-medium transition-colors duration-150 hover:cursor-pointer hover:opacity-80"
       onClick={() => (theme === "dark" ? setTheme("light") : setTheme("dark"))}
     >
       {theme === "dark" ? (

@@ -1,10 +1,49 @@
 "use client";
 
-import React from "react";
+import React, { KeyboardEvent, useState } from "react";
 import Lottie from "lottie-react";
-import animation from "./animation.json";
+import { useDispatch } from "react-redux";
+
+import Input from "@/components/form/input";
+
+import { setCurrentGithubUsernames } from "@/redux/slice/github";
+import { useGetGithubUsersMutation } from "@/services/github";
+
+import heroLottieFile from "@/assets/lottie/hero.json";
+import loadingLottieFile from "@/assets/lottie/loading.json";
+import notFoundLottieFile from "@/assets/lottie/not-found.json";
+
+import { toErrorWithMessage } from "@/utils/errorHandling";
 
 const Hero = () => {
+  const dispatch = useDispatch();
+  const [searchGithubUsers, { isLoading }] = useGetGithubUsersMutation();
+
+  const [error, setError] = useState<string | undefined>(undefined);
+  const [isNotFound, setIsNotFound] = useState(false);
+
+  const onSubmit = async (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      try {
+        setIsNotFound(false);
+        setError(undefined);
+        const input = (e.target as HTMLInputElement).value;
+
+        const res = await searchGithubUsers({
+          username: input,
+        }).unwrap();
+
+        dispatch(setCurrentGithubUsernames(res.data.items));
+
+        if (res.data.items.length === 0) {
+          setIsNotFound(true);
+        }
+      } catch (error) {
+        toErrorWithMessage(error, setError);
+      }
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div className="md:py-48">
@@ -12,10 +51,24 @@ const Hero = () => {
           Search Github Username
         </h1>
         <div className="mt-4" />
-        <input className="w-full p-5 bg-white text-black" />
+
+        <Input onKeyDown={onSubmit} placeholder="e.g: crusherblack" />
+        {error && (
+          <p className="mt-2 text-red-500 capitalize text-sm font-semibold">
+            {error}
+          </p>
+        )}
       </div>
       <div className="relative w-full text-black/90 dark:text-white/90 flex justify-center items-center">
-        <Lottie animationData={animation} />
+        <Lottie
+          animationData={
+            isLoading
+              ? loadingLottieFile
+              : isNotFound
+              ? notFoundLottieFile
+              : heroLottieFile
+          }
+        />
       </div>
     </div>
   );
