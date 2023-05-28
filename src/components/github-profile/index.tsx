@@ -1,15 +1,18 @@
 import React, { useMemo } from "react";
+
 import { useGetGithubUserRepositoriesQuery } from "@/services/github";
 import { BsFillBuildingFill } from "react-icons/bs";
 import { ImLocation2 } from "react-icons/im";
-import Lottie from "lottie-react";
 import { HiUsers } from "react-icons/hi";
 import { RiGitRepositoryFill } from "react-icons/ri";
+import Lottie from "lottie-react";
+
+import Button from "@/components/generics/button";
+import Image from "@/components/generics/image";
+import IconText from "./icon-text";
+import RepoItem from "./repo-item";
 
 import LoadingGitLottieFile from "@/assets/lottie/loading-git.json";
-import Button from "./generics/button";
-import { AiFillStar } from "react-icons/ai";
-import Image from "@/components/generics/image";
 
 type Props = {
   username: string;
@@ -78,7 +81,8 @@ const GithubProfile = (props: Props) => {
 
         <div className="flex items-center text-sm gap-1 w-full flex-start">
           <div className="flex items-center gap-2 ">
-            <HiUsers /> <p>{profile?.followers} followers</p>
+            <HiUsers className="h-3 w-3" />{" "}
+            <p>{profile?.followers} followers</p>
           </div>
           ·
           <div className="flex items-center gap-2 ">
@@ -88,15 +92,15 @@ const GithubProfile = (props: Props) => {
 
         <div className="mt-4" />
 
-        <div className="flex items-center gap-2 w-full flex-start mb-2">
-          <BsFillBuildingFill />
-          {profile?.company || "-"}
-        </div>
+        <IconText
+          title={profile?.company}
+          icon={<BsFillBuildingFill className="h-4 w-4" />}
+        />
 
-        <div className="flex items-center gap-2 w-full flex-start">
-          <ImLocation2 />
-          {profile?.location || "-"}
-        </div>
+        <IconText
+          title={profile?.location}
+          icon={<ImLocation2 className="h-4 w-4" />}
+        />
       </div>
 
       <div className="md:w-9/12">
@@ -108,37 +112,7 @@ const GithubProfile = (props: Props) => {
         </div>
         {repos &&
           repos?.length > 0 &&
-          repos?.map((repo) => (
-            <div
-              key={repo.id}
-              className="border-t md:flex md:justify-between border-gray-600 p-2 min-h-[6rem]"
-            >
-              <div className="md:w-4/5">
-                <a
-                  href={repo.html_url}
-                  target="_blank"
-                  className="font-semibold dark:text-transparent hover:underline text-sm mb-2 md:text-base text-blue-600 dark:bg-clip-text dark:bg-gradient-to-r dark:from-blue-600 dark:to-blue-400"
-                >
-                  {repo.full_name}
-                </a>
-                <p className="text-xs mb-2 md:text-sm mt-2">
-                  {repo.description}
-                </p>
-                {repo.language && (
-                  <span className="text-xs border dark:bg-gray-700 p-1 rounded-md ">
-                    {repo.language}
-                  </span>
-                )}
-              </div>
-
-              <div className="md:w-1/5 flex items-start">
-                <div className="flex items-center justify-end w-full gap-1 dark:text-yellow-300 text-xs md:text-sm">
-                  <AiFillStar />
-                  {repo.stargazers_count} star
-                </div>
-              </div>
-            </div>
-          ))}
+          repos?.map((repo) => <RepoItem key={repo.id} repo={repo} />)}
       </div>
     </div>
   );
