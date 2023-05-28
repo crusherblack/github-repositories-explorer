@@ -35,6 +35,8 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+Don't forget to add your Github Token to .env !!!
+
 ## Running Tests
 
 To run tests, run the following command
