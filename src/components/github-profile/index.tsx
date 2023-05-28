@@ -118,9 +118,9 @@ const GithubProfile = (props: Props) => {
             Repositories {`(${profile?.public_repos || 0})`}
           </p>
         </div>
-        <div className="flex mb-2 gap-2">
+        <div className="md:flex mb-2 gap-2">
           <Input
-            className="md:w-4/5"
+            className="mb-2 md:mb-0 md:w-4/5"
             placeholder="Find a repository..."
             onChange={(e) => setSearch(e.target.value)}
             value={search}
@@ -136,11 +136,15 @@ const GithubProfile = (props: Props) => {
             value={filter}
           />
         </div>
-        {repos &&
-          repos?.length > 0 &&
+        {repos && repos?.length > 0 ? (
           repos?.map((repo, index) => (
             <RepoItem key={repo.id} repo={repo} index={index} />
-          ))}
+          ))
+        ) : (
+          <p className="text-sm text-gray-400 text-center mt-4">
+            Nothing Here...
+          </p>
+        )}
       </div>
     </div>
   );
