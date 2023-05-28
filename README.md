@@ -1,34 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Github Repositories Expolorer
 
-First, run the development server:
+The Github Repositories Explorer is a web application that allows users to search for Github users by username and display a list of all repositories associated with each search result. Users can enter the username of a Github user, and the application will retrieve the list of repositories for that user using the Github API. The application displays the list of repositories on the screen, allowing the user to explore and view details about each repository, such as the name, description, and URL. With this application, users can easily discover new Github repositories and explore the code and projects of other users on the platform.
+
+
+## Screenshots
+
+![App Screenshot](https://github.com/crusherblack/github-repositories-explorer/blob/master/images/image1.png)
+
+
+## Running Tests
+
+To run tests, run the following command
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+  npm run test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Install my-project with npm
 
-## Learn More
+```bash
+  npm install my-project
+  cd my-project
+```
+    
+## Support
 
-To learn more about Next.js, take a look at the following resources:
+For support, email fake@fake.com or join our Slack channel.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Tech Stack
 
-## Deploy on Vercel
+**Client:** React, Redux, TailwindCSS
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Server:** Node, Express
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Usage/Examples
+
+```javascript
+import Component from 'my-project'
+
+function App() {
+  return <Component />
+}
+```
+
+
+## Used By
+
+This project is used by the following companies:
+
+- Company 1
+- Company 2
+
+
+## Feedback
+
+If you have any feedback, please reach out to us at fake@fake.com
+
+
+## Features
+
+- Light/dark mode toggle
+- Live previews
+- Fullscreen mode
+- Cross platform
+
+
+## Appendix
+
+Any additional information goes here
+
