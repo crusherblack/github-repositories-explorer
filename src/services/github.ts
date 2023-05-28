@@ -5,7 +5,7 @@ import {
 } from "@/types/github";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-type ReposResponse = {
+export type ReposResponse = {
   message: string;
   data: {
     profile: GithubUsernameResponse["data"];

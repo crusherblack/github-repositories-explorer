@@ -14,6 +14,7 @@ import loadingLottieFile from "@/assets/lottie/loading.json";
 import notFoundLottieFile from "@/assets/lottie/not-found.json";
 
 import { toErrorWithMessage } from "@/utils/errorHandling";
+import Button from "./generics/button";
 
 const Hero = () => {
   const dispatch = useDispatch();
@@ -21,26 +22,30 @@ const Hero = () => {
 
   const [error, setError] = useState<string | undefined>(undefined);
   const [isNotFound, setIsNotFound] = useState(false);
+  const [input, setInput] = useState("");
 
-  const onSubmit = async (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      try {
-        setIsNotFound(false);
-        setError(undefined);
-        const input = (e.target as HTMLInputElement).value;
+  const handleSubmit = async () => {
+    try {
+      setIsNotFound(false);
+      setError(undefined);
 
-        const res = await searchGithubUsers({
-          username: input,
-        }).unwrap();
+      const res = await searchGithubUsers({
+        username: input,
+      }).unwrap();
 
-        dispatch(setCurrentGithubUsernames(res.data.items));
+      dispatch(setCurrentGithubUsernames(res.data.items));
 
-        if (res.data.items.length === 0) {
-          setIsNotFound(true);
-        }
-      } catch (error) {
-        toErrorWithMessage(error, setError);
+      if (res.data.items.length === 0) {
+        setIsNotFound(true);
       }
+    } catch (error) {
+      toErrorWithMessage(error, setError);
+    }
+  };
+
+  const onPressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSubmit();
     }
   };
 
@@ -52,12 +57,24 @@ const Hero = () => {
         </h1>
         <div className="mt-4" />
 
-        <Input onKeyDown={onSubmit} placeholder="e.g: crusherblack" />
+        <Input
+          onKeyDown={onPressEnter}
+          placeholder="e.g: crusherblack"
+          onChange={(e) => setInput(e.target.value)}
+        />
         {error && (
           <p className="mt-2 text-red-500 capitalize text-sm font-semibold">
             {error}
           </p>
         )}
+        <Button
+          size="large"
+          className="mt-4 w-full md:w-fit"
+          loading={isLoading}
+          onClick={handleSubmit}
+        >
+          Search User
+        </Button>
       </div>
       <div className="relative w-full text-black/90 dark:text-white/90 flex justify-center items-center">
         <Lottie
