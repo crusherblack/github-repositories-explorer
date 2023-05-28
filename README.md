@@ -58,7 +58,7 @@ For support, email fadhildarma13@gmail.com.
 
 ## Feedback
 
-If you have any feedback, please reach out to us at fake@fake.com
+If you have any feedback, please reach out to us at fadhildarma13@gmail.com.
 
 
 
