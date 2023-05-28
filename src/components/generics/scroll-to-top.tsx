@@ -7,13 +7,19 @@ const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    const callback = () => {
       if (window.scrollY > 100) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
       }
-    });
+    };
+
+    window.addEventListener("scroll", callback);
+
+    return () => {
+      window.removeEventListener("scroll", callback);
+    };
   }, []);
 
   const goTop = () => {
