@@ -31,7 +31,7 @@ const ScrollToTop = () => {
 
   return (
     <button
-      className="fixed bottom-6  right-6 text-3xl z-10 cursor-pointer text-teal-400 bg-transparent rounded-full px-0 border-none opacity-70"
+      className="fixed bottom-6  right-6 text-3xl z-10 cursor-pointer text-teal-400  rounded-full px-0 border-none bg-white dark:bg-black/80"
       style={{ display: isVisible ? "block" : "none" }}
       onClick={goTop}
     >
