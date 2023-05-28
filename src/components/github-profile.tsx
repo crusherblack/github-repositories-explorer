@@ -109,7 +109,10 @@ const GithubProfile = (props: Props) => {
         {repos &&
           repos?.length > 0 &&
           repos?.map((repo) => (
-            <div className="border-t md:flex md:justify-between border-gray-600 p-2 min-h-[6rem]">
+            <div
+              key={repo.id}
+              className="border-t md:flex md:justify-between border-gray-600 p-2 min-h-[6rem]"
+            >
               <div className="md:w-4/5">
                 <a
                   href={repo.html_url}
