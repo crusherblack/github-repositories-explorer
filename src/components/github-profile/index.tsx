@@ -1,6 +1,3 @@
-import React, { useMemo } from "react";
-
-import { useGetGithubUserRepositoriesQuery } from "@/services/github";
 import { BsFillBuildingFill } from "react-icons/bs";
 import { ImLocation2 } from "react-icons/im";
 import { HiUsers } from "react-icons/hi";
@@ -13,6 +10,9 @@ import IconText from "./icon-text";
 import RepoItem from "./repo-item";
 
 import LoadingGitLottieFile from "@/assets/lottie/loading-git.json";
+import Input from "../form/input";
+import Select from "../form/select";
+import useGitubProfileHook from "./hook";
 
 type Props = {
   username: string;
@@ -20,11 +20,19 @@ type Props = {
 
 const GithubProfile = (props: Props) => {
   const { username } = props;
-  const { data, isLoading, error, refetch } =
-    useGetGithubUserRepositoriesQuery(username);
 
-  const profile = useMemo(() => data?.data?.profile, [data]);
-  const repos = useMemo(() => data?.data?.repos, [data]);
+  const {
+    isLoading,
+    error,
+    profile,
+    search,
+    repos,
+    filter,
+    languages,
+    setSearch,
+    setFilter,
+    refetch,
+  } = useGitubProfileHook({ username });
 
   if (isLoading) {
     return (
@@ -109,6 +117,24 @@ const GithubProfile = (props: Props) => {
           <p className="font-semibold    dark:text-transparent  dark:bg-clip-text dark:bg-gradient-to-r dark:from-blue-600 dark:to-blue-400">
             Repositories
           </p>
+        </div>
+        <div className="flex mb-2 gap-2">
+          <Input
+            className="md:w-4/5"
+            placeholder="Find a repository..."
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
+          />
+          <Select
+            className="md:w-1/5"
+            placeholder="Language"
+            options={languages}
+            onChange={(e) => {
+              const value = e.target.value;
+              setFilter(value === "All" ? "" : e.target.value);
+            }}
+            value={filter}
+          />
         </div>
         {repos &&
           repos?.length > 0 &&
