@@ -10,11 +10,16 @@ const useGitubProfileHook = ({ username }: { username: string }) => {
   const profile = useMemo(() => data?.data?.profile, [data]);
   const repos = useMemo(() => {
     return data?.data?.repos.filter((repo) => {
-      return (
-        repo.full_name.toLowerCase().includes(search.toLocaleLowerCase()) &&
-        repo &&
-        repo?.language?.toLowerCase().includes(filter.toLocaleLowerCase())
-      );
+      const searchConditionMeet = repo.full_name
+        .toLowerCase()
+        .includes(search.toLocaleLowerCase());
+
+      return searchConditionMeet && filter === "Unknown"
+        ? !repo?.language
+        : !filter
+        ? true && searchConditionMeet
+        : repo?.language?.toLowerCase().includes(filter.toLocaleLowerCase()) &&
+          searchConditionMeet;
     });
   }, [data, search, filter]);
 
@@ -23,7 +28,7 @@ const useGitubProfileHook = ({ username }: { username: string }) => {
 
     data?.data?.repos.forEach((repo) => {
       if (!temp.has(repo.language)) {
-        repo.language && temp.set(repo.language, "");
+        repo.language ? temp.set(repo.language, "") : temp.set("Unknown", "");
       }
     });
 

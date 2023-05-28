@@ -115,7 +115,7 @@ const GithubProfile = (props: Props) => {
         <div className="flex items-center gap-2 text-lg mb-2 md:text-xl">
           <RiGitRepositoryFill className=" dark:text-blue-600" />{" "}
           <p className="font-semibold    dark:text-transparent  dark:bg-clip-text dark:bg-gradient-to-r dark:from-blue-600 dark:to-blue-400">
-            Repositories
+            Repositories {`(${profile?.public_repos || 0})`}
           </p>
         </div>
         <div className="flex mb-2 gap-2">
@@ -138,7 +138,9 @@ const GithubProfile = (props: Props) => {
         </div>
         {repos &&
           repos?.length > 0 &&
-          repos?.map((repo) => <RepoItem key={repo.id} repo={repo} />)}
+          repos?.map((repo, index) => (
+            <RepoItem key={repo.id} repo={repo} index={index} />
+          ))}
       </div>
     </div>
   );

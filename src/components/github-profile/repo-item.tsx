@@ -5,10 +5,11 @@ import { AiFillStar } from "react-icons/ai";
 
 type Props = {
   repo: GithubRepoResponse["data"][0];
+  index: number;
 };
 
 const RepoItem = (props: Props) => {
-  const { repo } = props;
+  const { repo, index: _ } = props;
   return (
     <div
       key={repo.id}
