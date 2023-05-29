@@ -1,6 +1,6 @@
 "use client";
 
-import React, { KeyboardEvent, useState } from "react";
+import React, { KeyboardEvent, useEffect, useState } from "react";
 import Lottie from "lottie-react";
 import { useDispatch } from "react-redux";
 
@@ -48,6 +48,14 @@ const Hero = () => {
       handleSubmit();
     }
   };
+
+  useEffect(() => {
+    return () => {
+      setInput("");
+      setIsNotFound(false);
+      setError(undefined);
+    };
+  }, []);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
