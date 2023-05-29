@@ -27,8 +27,6 @@ export const toErrorWithMessage = (
   error: unknown,
   setError: React.Dispatch<React.SetStateAction<string | undefined>>
 ): void => {
-  console.log(error);
-
   if (isFetchBaseQueryError(error)) {
     const errMsg =
       "error" in error
@@ -38,7 +36,6 @@ export const toErrorWithMessage = (
         : JSON.stringify(error.data);
     setError(errMsg);
   } else if (isErrorWithMessage(error)) {
-    console.log("run2");
     setError(error.message);
   }
 };
