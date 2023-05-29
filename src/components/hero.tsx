@@ -49,14 +49,6 @@ const Hero = () => {
     }
   };
 
-  useEffect(() => {
-    return () => {
-      setInput("");
-      setIsNotFound(false);
-      setError(undefined);
-    };
-  }, []);
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div className="md:py-48">
@@ -69,6 +61,7 @@ const Hero = () => {
           onKeyDown={onPressEnter}
           placeholder="e.g: crusherblack"
           onChange={(e) => setInput(e.target.value)}
+          value={input}
         />
         {error && (
           <p className="mt-2 text-red-500 capitalize text-sm font-semibold">
