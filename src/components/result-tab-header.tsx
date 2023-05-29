@@ -10,7 +10,7 @@ const ResultTabHeader = (props: Props) => {
 
   return (
     <div className="flex items-center gap-2 ">
-      {/* <AiFillGithub className="w-6 h-6" /> */}
+      <AiFillGithub className="w-6 h-6" />
       <p className="text-md">{username}</p>
     </div>
   );
