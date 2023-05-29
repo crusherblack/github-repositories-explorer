@@ -30,7 +30,7 @@ test("app should display an error when the request fail", async () => {
     name: /search user/i,
   });
 
-  fireEvent.change(input, { target: { value: "bruhHackin" } });
+  fireEvent.change(input, { target: { value: "lastein" } });
   fireEvent.click(button);
   await waitFor(() => {
     expect(getByText(/searching\.\.\./i)).toBeInTheDocument();
@@ -63,7 +63,7 @@ test("app should display list github user based on search query", async () => {
     name: /search user/i,
   });
 
-  fireEvent.change(input, { target: { value: "bruhHackin" } });
+  fireEvent.change(input, { target: { value: "lastein" } });
   fireEvent.click(button);
   await waitFor(() => {
     expect(getByText(/searching\.\.\./i)).toBeInTheDocument();
@@ -75,8 +75,13 @@ test("app should display list github user based on search query", async () => {
   await waitFor(() => {
     expect(
       getByRole("button", {
-        name: /bruhhackin/i,
+        name: /Lasteinsa/i,
       })
     ).toBeInTheDocument();
   });
+
+  const resultContainer = container.querySelector("#result-container");
+
+  expect(resultContainer).toBeInTheDocument();
+  expect(resultContainer?.children.length).toBe(5);
 });

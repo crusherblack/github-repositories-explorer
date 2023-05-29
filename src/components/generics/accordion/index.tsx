@@ -57,7 +57,7 @@ const Accordion = (props: AccordionProps) => {
   const { datasource = [] } = props;
 
   return (
-    <div>
+    <div id="result-container">
       {datasource.map((item) => (
         <Disclosure key={item.id} header={item.header} content={item.content} />
       ))}
