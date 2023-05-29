@@ -21,6 +21,7 @@ const Header = () => {
         <div className="flex items-center gap-2">
           <Navbar />
           <ThemeSwitcher />
+
           {/* <CommandMenu />
           <MobileNav /> */}
         </div>

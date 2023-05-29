@@ -69,6 +69,7 @@ const GithubProfile = (props: Props) => {
         <a
           href={profile?.html_url}
           target="_blank"
+          rel="noopener noreferrer"
           className="text-base hover:underline"
         >
           {profile?.name}
@@ -76,6 +77,7 @@ const GithubProfile = (props: Props) => {
         <a
           href={profile?.html_url}
           target="_blank"
+          rel="noopener noreferrer"
           className="text-sm hover:underline"
         >
           @{profile?.login}

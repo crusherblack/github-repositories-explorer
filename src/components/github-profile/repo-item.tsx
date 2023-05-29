@@ -19,6 +19,7 @@ const RepoItem = (props: Props) => {
         <a
           href={repo.html_url}
           target="_blank"
+          rel="noopener noreferrer"
           className="font-semibold dark:text-transparent hover:underline text-sm mb-2 md:text-base text-blue-600 dark:bg-clip-text dark:bg-gradient-to-r dark:from-blue-600 dark:to-blue-400"
         >
           {repo.full_name}
