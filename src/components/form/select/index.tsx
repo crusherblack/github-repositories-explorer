@@ -3,7 +3,7 @@ import { type SelectHTMLAttributes } from "react";
 import clsx from "clsx";
 
 interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
-  placeholder: string;
+  placeholder?: string;
   options: {
     value: string;
     label: string;
@@ -24,7 +24,7 @@ const Select = (props: Props) => {
         {...props}
         className="w-full form-input dark:bg-gray-900  rounded-md border-none"
       >
-        <option value="" selected disabled>
+        <option value="" disabled>
           {placeholder}
         </option>
         {options.map((option) => (
