@@ -77,7 +77,7 @@ const Hero = () => {
         </Button>
       </div>
       <div className="relative w-full text-black/90 dark:text-white/90 flex flex-col justify-center items-center">
-        <Lottie
+        {/* <Lottie
           animationData={
             isLoading
               ? loadingLottieFile
@@ -85,7 +85,7 @@ const Hero = () => {
               ? notFoundLottieFile
               : heroLottieFile
           }
-        />
+        /> */}
         {isLoading && <p>Searching...</p>}
       </div>
     </div>
