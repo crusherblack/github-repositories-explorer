@@ -47,7 +47,7 @@ const Button = ({
       {...props}
       disabled={loading || disabled}
     >
-      {loading && <Spinner />}
+      {true && <Spinner />}
       {icon && !loading && icon}
       {children}
     </button>
